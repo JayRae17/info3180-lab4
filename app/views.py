@@ -48,6 +48,20 @@ def upload():
 
     return render_template('upload.html', form = uploadform)
 
+## GET UPLOADED IMAGES FUNCTION
+def get_uploaded_images():
+    rootdir = os.getcwd()
+    filelst = []
+    for subdir, dirs, files in os.walk(rootdir + '/app/static/uploads'):
+        for file in files:
+            filelst.append(file)
+    return filelst
+
+@app.route('/files')
+def files():
+    get_uploaded_images()
+    return render_template('files.html', imgfiles= get_uploaded_images())
+
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
@@ -73,6 +87,7 @@ def logout():
 ###
 # The functions below should be applicable to all Flask apps.
 ###
+
 
 # Flash errors from the form if validation fails
 def flash_errors(form):
