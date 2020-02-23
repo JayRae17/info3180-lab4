@@ -1,20 +1,30 @@
 {% extends 'base.html' %}
 
 {% block main %}
-<h1 class="page-header">Your Uploaded Images</h1>
 
-<div class = "container">
+<h1 class="page-header">Uploaded Images:</h1>
+
+<style>
+    .container {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          grid-gap: 12px;
+          padding-top: 10px;
+    
+    }
+
+    .cell {
+          border: 1px solid #C39797;
+          padding: 5px;
+    }
+</style>
+
+<div class = "space"></div>
+<div class="container">
     {% for img in imgfiles %}
-
-    <ul>
-        <li>
-            <img src="{{ url_for('static', filename='uploads/' + img) }}" height = "240" width="230"/>
-        </li>
-    </ul>
-
+        <div >
+            <img class = "cell" src="{{ url_for('static', filename='uploads/' + img) }}" height = "240" width="230"/>
+        </div>
     {% endfor %}
 </div>
-
-
-
 {% endblock %}
